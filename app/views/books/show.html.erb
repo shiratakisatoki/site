@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-6">
+    <span class="text-muted"><%= Book.human_attribute_name(:title) %></span>
+    <%= @book.title %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <span class="text-muted"><%= Book.human_attribute_name(:author) %></span>
+    <%= @book.author %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <span class="text-muted"><%= Book.human_attribute_name(:published_on) %></span>
+    <%= @book.published_on %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <span class="text-muted"><%= Book.human_attribute_name(:showing) %></span>
+    <%= @book.showing %>
+  </div>
+</div>
+
+<div class="row">
+   <div class="col-md-6">
+    <span class="text-muted"><%= Book.human_attribute_name(:price) %></span>
+    <%= @book.price %>
+  </div>
+</div>
+
+<div class="row">
+   <div class="col-md-6">
+    <span class="text-muted"><%= Book.human_attribute_name(:picture) %></span>
+    <%= image_tag @book.picture, width: 300 if @book.picture.present? %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <span class="text-muted"><%= Book.human_attribute_name(:tag) %></span>
+    <%= @book.tags.map(&:name).join(', ') %>
+  </div>
+</div>
+
+<%= link_to t('.edit'), edit_book_path(@book) %> |
+<%= link_to t('.back'), books_path %>

@@ -1,0 +1,35 @@
+<h1>注文画面</h1>
+<%=form_with(model: @order, local: true, url: confirm_orders_path) do |form| %>
+
+<% @line_items.each do |item| %>
+    <% book = item.book %>
+    <div>
+        <h3><%=book.title %></h3>
+        <p><%= item.quantity %>冊</p>
+        <p><%= number_to_currency item.total_price, precision: 0, unit: "", format: "%u %n" %>
+            <span>円　（税込）</span></p>
+    </div>
+<% end %>
+
+<div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, {value: 1} %>
+</div>
+
+<br />
+
+<div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+</div>
+
+<%= form.hidden_field :book_id, value: @product.id %>
+<%= form.hidden_field :user_id, value: current_user.id %>
+
+<br />
+
+<div class="actions">
+    <%= form.submit "注文を確認する" %>
+</div>
+
+<% end %>

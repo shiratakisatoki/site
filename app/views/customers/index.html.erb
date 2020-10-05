@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Customers</h1>
+<h2>Search</h2>
+<%= search_form_for @q do |f| %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <td><%= f.text_field :name_cont %></td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td><%= f.number_field :age_gteq %> ~ <%= f.number_field :age_Iteq %></td>
+    </tr>
+    <tr>
+      <th>Employee</th>
+      <td><%= f.collection_select :employee_id_eq, Employee.all, :id, :name, include_blank: true %></td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td><%= f.number_field :employee_age_gteq %> ~ <%= f.number_field :employee_age_Iteq %></td>
+    </tr>
+  </table>
+  <%= f.submit %>
+<% end %>
+<h2>Result</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :employee_name, 'Employee') %></th>
+      <th><%= sort_link(@q, :name, 'Name') %></th>
+      <th><%= sort_link(@q, :age, 'Age') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.employee.name %>(<%= customer.employee.age %>)</td>
+        <td><%= customer.name %></td>
+        <td><%= customer.age %></td>
+        <td><%= link_to 'Show', customer %></td>
+        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customer', new_customer_path %>

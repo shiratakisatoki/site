@@ -1,0 +1,24 @@
+ja:
+  activerecord:
+    models:
+      book: 本
+
+    attributes:
+      book:
+        title: タイトル
+        author: 著者
+        published_on: 出版日
+        showing: 商品表示
+        price: 価格
+        picture: 商品写真
+        tag: タグ
+        picture_content_type: Content Type
+      tag:
+        name: タグ名
+      order:
+        quantity: 数量
+        address: 住所
+        user: 発注者
+        created_at: 注文日時
+      order_detail:
+        quantity: 数量

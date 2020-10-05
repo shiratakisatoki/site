@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<% @line_items.each do |line_item| %>
+    <% book = line_item.book %>
+    <div>
+        <p><%=book.title %></p>
+        <p><%= line_item.quantity %>冊</p>
+        <p><%= number_to_currency line_item.total_price, precision: 0, unit: "", format: "%u %n" %>
+            <span>円　（税込）</span></p>
+    </div>
+<% end %>
+
+<div>
+    <p>合計　<%= @cart.total_price, precision: 0, unit: "", format: "%u %n" %>
+        <span>円　（税込）</span></p>
+    </p>
+</div>
+
+<% if @line_items.count == 0 %>
+買い物かごには何も入っていません
+<% else %>
+    <%= link_to '購入する', new_order_path %>
+    <%= link_to '買い物かごを空にする', @cart, method: :delete, data: { confirm: '買い物かごの中身をすべて削除してもよろしいですか？' } %>
+<% end %>
+
+<%= link_to 'Edit', edit_cart_path(@cart) %> |
+<%= link_to 'Back', carts_path %>
